@@ -45,4 +45,6 @@ public class Product {
     public void setCost(Long cost) {
         this.cost = cost;
     }
+
+
 }

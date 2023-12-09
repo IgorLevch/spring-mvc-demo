@@ -34,14 +34,7 @@ public class ProductController {
         model.addAttribute("product",prRep.getById(id));
         return "products3";
     }
-   /* @GetMapping("/{id}")
-    public String editPage(@PathVariable("id")Long id,Model model){
-        // Конструкция из @PathVariable и шаблона {id} заставит Спринг МВС извлечь элемент {id} из УРЛ
-        // и преобразовать его в тип ЛОнг и передать в виде параметра этого метода
-        List<Product> products = (List<Product>) prRep.getById(Id);
-        model.addAttribute("product",products);
-        return "products3";
-    }*/
+
 
 
 
