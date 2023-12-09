@@ -25,6 +25,11 @@ public class ProductRepository {
         return products;
     }
 
+
+
+    public void update(Product product) {
+        products.add(product);
+    }
     public Product getById(Long Id){
         return products.get(Math.toIntExact(Id));
         //return products.stream().filter(p->p.getId().equals(Id)).findFirst().orElseThrow(()->new RuntimeException());
@@ -32,9 +37,6 @@ public class ProductRepository {
 
 
 
-    public void update(Product product) {
-        products.add(product);
-    }
 
 
 }

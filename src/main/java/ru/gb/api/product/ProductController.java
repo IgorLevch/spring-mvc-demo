@@ -27,13 +27,6 @@ public class ProductController {
         return "products2";
 
     }
-    @GetMapping("/{id}")
-    public String editPage(@PathVariable("id")Long id,Model model){
-        // Конструкция из @PathVariable и шаблона {id} заставит Спринг МВС извлечь элемент {id} из УРЛ
-        // и преобразовать его в тип ЛОнг и передать в виде параметра этого метода
-        model.addAttribute("product",prRep.getById(id));
-        return "products3";
-    }
 
 
 
@@ -44,6 +37,13 @@ public class ProductController {
     public String update(Product product){
     prRep.update(product);
     return "redirect:/product";
+    }
+    @GetMapping("/{id}")
+    public String editPage(@PathVariable("id")Long id,Model model){
+        // Конструкция из @PathVariable и шаблона {id} заставит Спринг МВС извлечь элемент {id} из УРЛ
+        // и преобразовать его в тип ЛОнг и передать в виде параметра этого метода
+        model.addAttribute("product",prRep.getById(id));
+        return "products3";
     }
 
 

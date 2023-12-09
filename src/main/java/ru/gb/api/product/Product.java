@@ -25,6 +25,7 @@ public class Product {
         return id;
     }
 
+
     public String getTitle() {
         return title;
     }
