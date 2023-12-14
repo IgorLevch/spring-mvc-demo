@@ -15,7 +15,7 @@ public class ProductRepository {
     // будет вызван данный метод (перед выполнением каких-либо еще действий).
 
 
-    public List<Product> getAll(){
+ /*   public List<Product> getAll(){
         products =List.of(
              new Product(),
              new Product(),
@@ -23,16 +23,34 @@ public class ProductRepository {
              new Product());
 
         return products;
+    }*/
+
+    public List<Product> getAll(){
+        products =List.of(
+                new Product(1L,"ggh",45L),
+                new Product(2L,"hhj",78L),
+                new Product(78L,"jjhh",876L),
+                new Product(9876L,"hgfre",98L));
+
+
+        return products;
+
     }
 
+
+
+    public void add(Product p){
+        products.add(p);
+    }
 
 
     public void update(Product product) {
         products.add(product);
     }
     public Product getById(Long Id){
-        return products.get(Math.toIntExact(Id));
-        //return products.stream().filter(p->p.getId().equals(Id)).findFirst().orElseThrow(()->new RuntimeException());
+        //return products.get(Math.toIntExact(Id));
+        return products.stream().filter(p->p.getId().equals(Id)).findFirst().orElseThrow(()->new RuntimeException());
+
     }
 
 

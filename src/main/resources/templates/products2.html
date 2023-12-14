@@ -54,7 +54,7 @@
                             <td th:text="${p.getId()}">...</td>
                             <td th:text="${p.getTitle()}">...</td>
                             <td th:text="${p.getCost()}">...</td>
-                            <td> <a class="btn btn-success" th:href="@{/p/{id}(id=${p.id})}" ><i class="fas fa-edit"></i></a>
+                            <td> <a class="btn btn-success" th:href="@{'/product3/'+${p.id}}" ><i class="fas fa-edit"></i></a>
                             </td>
 
                         </tr>
