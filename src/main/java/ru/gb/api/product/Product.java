@@ -21,9 +21,11 @@ public class Product {
     }
 
 
+
     public Long getId() {
         return id;
     }
+
 
     public String getTitle() {
         return title;
@@ -46,5 +48,9 @@ public class Product {
         this.cost = cost;
     }
 
-
+    public Product(Long id, String title, Long cost) {
+        this.id = id;
+        this.title = title;
+        this.cost = cost;
+    }
 }
