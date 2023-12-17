@@ -10,13 +10,13 @@ public class Product {
     private Integer level;
 
 
-    public Product(){
+  /*  public Product(){
         this.id = counter++;
         this.cost= counter+15 ;
         this.title = "Product #" +id;
 
     }
-
+*/
     public static Long getCounter() {
         return counter;
     }

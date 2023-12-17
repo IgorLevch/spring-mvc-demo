@@ -13,7 +13,7 @@ angular.module('app', []).controller('indexController', function($scope,$http){
         });
     };
 
-    $scope.loadProducts();
+
 
     $scope.deleteProduct = function (productId) {
         $http.get(contextPath + '/allProd/delete/' + productId)
