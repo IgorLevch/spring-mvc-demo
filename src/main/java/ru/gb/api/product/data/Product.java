@@ -1,4 +1,4 @@
-package ru.gb.api.product;
+package ru.gb.api.product.data;
 
 public class Product {
 
@@ -7,6 +7,7 @@ public class Product {
     private Long id;
     private String title;
     private Long cost;
+    private Integer level;
 
 
     public Product(){
@@ -48,9 +49,18 @@ public class Product {
         this.cost = cost;
     }
 
-    public Product(Long id, String title, Long cost) {
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Product(Long id, String title, Long cost, Integer level) {
         this.id = id;
         this.title = title;
         this.cost = cost;
+        this.level = level;
     }
 }

@@ -1,11 +1,12 @@
-package ru.gb.api.product;
+package ru.gb.api.product.repositories;
 
 import org.springframework.stereotype.Repository;
+import ru.gb.api.product.data.Product;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 
+// Репозитории - это слой доступа к данным. Как правило, задача репозиториев - это взаимодействовать с БД.
 @Repository
 public class ProductRepository {
 
@@ -28,10 +29,10 @@ public class ProductRepository {
 
     public List<Product> getAll(){
         products =List.of(
-                new Product(1L,"ggh",45L),
-                new Product(2L,"hhj",78L),
-                new Product(78L,"jjhh",876L),
-                new Product(9876L,"hgfre",98L));
+                new Product(1L,"ggh",45L,80),
+                new Product(2L,"hhj",78L,80),
+                new Product(78L,"jjhh",876L,80),
+                new Product(9876L,"hgfre",98L,80));
 
 
         return products;
@@ -40,18 +41,12 @@ public class ProductRepository {
 
 
 
-    public void add(Product p){
-        products.add(p);
-    }
+//    public void add(Product p){
+//        products.add(p);
+//    }
 
-
-    public void update(Product product) {
-        products.add(product);
-    }
-    public Product getById(Long Id){
-        //return products.get(Math.toIntExact(Id));
-        return products.stream().filter(p->p.getId().equals(Id)).findFirst().orElseThrow(()->new RuntimeException());
-
+    public void deleteById(Long Id){
+        products.removeIf(s->s.getId().equals(Id));
     }
 
 
