@@ -5,11 +5,15 @@ angular.module('app', []).controller('indexController', function($scope,$http){
     const contextPath = 'http://localhost:8180/app';
 
     $scope.loadProducts = function() {
-    };
+
     $http.get(contextPath+'/allProd')
         .then(function(response){
+            console.log(response);
             $scope.ProductList =response.data;
         });
+    };
+
+    $scope.loadProducts();
 
     $scope.deleteProduct = function (productId) {
         $http.get(contextPath + '/allProd/delete/' + productId)
