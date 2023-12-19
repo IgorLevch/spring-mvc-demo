@@ -50,6 +50,10 @@ public class ProductRepository {
     }
 
 
+        public Product findById(Long id){
+        return products.stream().filter(s->s.getId().equals(id)).findFirst().get();
+        }
+
 
 
 

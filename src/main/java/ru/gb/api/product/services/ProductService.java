@@ -30,4 +30,11 @@ public class ProductService {
     }
 
 
+    public void changeLevel(Long productId, Integer delta) {
+    Product product = prRepo.findById(productId);
+    product.setLevel(product.getLevel()+delta);
+
+
+
+    }
 }

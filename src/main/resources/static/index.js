@@ -23,6 +23,22 @@ angular.module('app', []).controller('indexController', function($scope,$http){
 
     }
 
+
+    $scope.changeLevel = function (productId, delta) {
+        $http({
+            url: contextPath + '/allProd/change_level',
+            method: 'GET',
+            params: {
+                productId: productId,
+                delta: delta
+            }
+        }).then(function (response) {
+                $scope.loadProducts();
+            });
+
+    }
+
+
     // $scope - это связочка. Если мы что-то положим тут (в джава Скрипте) в $scope, то мы это увидим в ХТМЛ
     // scope - это коробка для обмена данными между ХТМЛ и ДжиЭс
     // это просто пример как раз scope:

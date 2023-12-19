@@ -32,4 +32,11 @@ public class ProductController {
     }
 
 
+    @GetMapping("/allProd/change_level")
+    public void changeLevel(@RequestParam Long productId, @RequestParam Integer delta){
+        proSer.changeLevel(productId, delta);
+    }
+
+
+
 }
