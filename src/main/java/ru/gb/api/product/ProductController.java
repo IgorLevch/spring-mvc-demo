@@ -82,4 +82,12 @@ public class ProductController {
     public List<Product> getAllProducts(){
         return prRep.getAll();
     }
+
+    @GetMapping("/new")
+    public String create(Model model){
+        model.addAttribute("products", new Product());
+        return "simple_form";
+    }
+
+
 }
