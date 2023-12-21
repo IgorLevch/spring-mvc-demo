@@ -1,8 +1,7 @@
-package ru.gb.api.product;
+package ru.geekbrains.product;
 
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 

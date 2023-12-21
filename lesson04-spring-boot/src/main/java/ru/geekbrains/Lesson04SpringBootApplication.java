@@ -1,15 +1,13 @@
-package ru.gb;
+package ru.geekbrains;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class Lesson04SpringBootApplication {
 
-//main class
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(Lesson04SpringBootApplication.class, args);
 	}
-
 
 }

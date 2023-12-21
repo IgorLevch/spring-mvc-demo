@@ -1,4 +1,4 @@
-package ru.gb.api.product;
+package ru.geekbrains.product;
 
 public class Product {
 
