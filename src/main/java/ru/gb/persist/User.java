@@ -3,9 +3,13 @@ package ru.gb.persist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import ru.gb.service.UserRepr;
 
 import java.util.List;
 
+
+// Это класс сущностей, который только содержит аннотации из пакета персистанс
+// и отвечает он только за взаимоедйствие с БД
 
 @Entity
 @Table(name="users")
@@ -20,16 +24,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true,nullable = false)
-    @NotEmpty
+  //  @NotEmpty
     private String username;
-    @NotEmpty
+  //  @NotEmpty
     @Column(nullable = false,length = 512)
     private String password;
 
-    @NotEmpty
+ //   @NotEmpty
     @Transient // поле не будет сохраняться в БД , в соответствии с этой аннотацией
     private String matchingPassword;
-    @Email
+  //  @Email
+   @Column
     private String email;
 
     // User связан с контактами отношениями ОнеТуМени
@@ -49,6 +54,16 @@ public class User {
         this.password = password;
         this.email = email;
     }
+
+
+    public User(UserRepr user) {
+        this.id=user.getId();
+        this.username=user.getUsername();
+        this.password=user.getPassword();
+        this.email=user.getEmail();
+    }
+
+
     @ManyToMany(mappedBy = "users") // это нужно для того, чтобы не создавались лишние таблицы
     private List<Role> roles;
 
