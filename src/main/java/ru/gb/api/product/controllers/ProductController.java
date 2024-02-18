@@ -26,6 +26,14 @@ public class ProductController {
         return proSer.getAllProducts();
     }
 
+/*    @PostMapping("/allProd") // Спринг 2 этих метода не перепутает. Если посылваем ПОСТ запрос - содадим нового
+    // если ГЕТ запрос - выведет всех
+    public Product saveNewProduct(@RequestBody Product product){
+        // @RequestBody означает, что в теле запроса, пришдешего с фронта будет Product
+        // и мы просим Стринг на автомате из тела запроса собрать объект Product / Это сделает бибилотека jackson
+        return proSer.save(product);
+    }*/
+
     @GetMapping("/allProd/delete/{id}")
     public void deleteById(@PathVariable Long id){
         proSer.deleteById(id);
