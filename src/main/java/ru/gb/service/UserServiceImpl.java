@@ -1,10 +1,15 @@
 package ru.gb.service;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gb.persist.User;
 import ru.gb.persist.UserRepository;
+import ru.gb.persist.UserSpecification;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +19,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+
     @Autowired // аннотация, чтобы Спринг внедрил ЮзерРепозитори
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -88,16 +95,57 @@ public class UserServiceImpl implements UserService {
 
 
 
+
     @Transactional
     @Override
     public void delete(long id) {
         userRepository.deleteById(id);   // это мы просто прокинули вызов на метод delete класса UR
     }
 
-    @Override
-    public List<UserRepr> findWithFilter(String usernameFilter) {
+    /* @Override
+   public List<UserRepr> findWithFilter(String usernameFilter) {
         return userRepository.findUserByUsernameLike(usernameFilter).stream()
                 .map(UserRepr::new)
                 .collect(Collectors.toList());
+    }  */   // используем метод ниже
+
+
+
+
+      // Класс Page - это для пагинации
+    @Override
+    public Page<UserRepr> findWithFilter(String usernameFilter, Integer minAge, Integer maxAge,
+                                         Integer page, Integer size
+    ) {
+
+        // ниже для criteria API после указания JpaSpecificationExecutor<User> в UserRepository:
+        //userRepository.findAll()   // выбираем Specification User Specification
+
+
+        Specification<User> spec = Specification.where(null);
+        if (usernameFilter!=null && !usernameFilter.isBlank()){
+            spec=spec.and(UserSpecification.usernameLike(usernameFilter));
+        }
+
+        if (minAge !=null){
+
+            spec=spec.and(UserSpecification.minAge(minAge));
+        }
+
+        if (maxAge !=null){
+
+            spec=spec.and(UserSpecification.maxAge(maxAge));
+        }
+
+
+            return userRepository.findAll(spec, PageRequest.of(page,size)) // переделано под пагинацию
+                    .map(UserRepr::new);
+
+
+// выше -- для criteria API
+
+      /*  return userRepository.findWithFilter(usernameFilter,minAge,maxAge).stream()
+                .map(UserRepr::new)
+                .collect(Collectors.toList());*/
     }
 }

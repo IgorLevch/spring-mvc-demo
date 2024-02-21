@@ -3,10 +3,13 @@ package ru.gb.controler;
 import jakarta.validation.Valid;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.gb.persist.User;
 import ru.gb.service.UserRepr;
 import ru.gb.service.UserService;
@@ -31,17 +34,26 @@ public class UserController {
     }
     @GetMapping
     public String listPage(Model model,
-                           @RequestParam("usernameFilter") Optional<String> usernameFilter ){
+                           @RequestParam("usernameFilter") Optional<String> usernameFilter,
+                           @RequestParam("ageMinFilter") Optional<Integer> ageMinFilter,
+                           @RequestParam("ageMaxFilter") Optional<Integer> ageMaxFilter,
+                           @RequestParam("page") Optional<Integer> page, // два параметра для пагинации сюда приходят
+                           @RequestParam("size") Optional<Integer> size
+
+                                                                                              ){
         logger.info("List page requested");
 
-        List<UserRepr> users;
-        if (usernameFilter.isPresent() && !usernameFilter.get().isBlank()){
-    users =  userService.findWithFilter(usernameFilter.get());
+        //для пагинации добавляем 2 параметра: номер страницы
+        // и размер страницы(сколько записей будет отображено на 1й странице).
 
-        }  else {
-
-        users = userService.findAll();
-        }
+        Page<UserRepr> users=userService.findWithFilter(
+                usernameFilter.filter(s->!s.isBlank()).orElse(null),
+                ageMinFilter.orElse(null),
+                ageMaxFilter.orElse(null),
+                page.orElse(1)-1,  // на фронте странийцы будут отображаться с 1-цы, но данный метод
+                // требует передавать страницы с нуля
+                size.orElse(3) // по 3 на стр-це отображаем
+        );
 
         model.addAttribute("users",users);
         return "user";
@@ -131,8 +143,16 @@ public class UserController {
         userService.delete(id);
         return "redirect:/user";
     }
+        // метод для того, чтобы наше исключение NotFoundException  что-то выводило. а не пустой экран:
+    @ExceptionHandler
+     public ModelAndView notFoundExceptionHandler(NotFoundException ex){
 
+        ModelAndView mav = new ModelAndView("not_found");// в качестве параметра - имя представления,
+        // которое мы будем выводить
+         mav.setStatus(HttpStatus.NOT_FOUND);       // указываем статус ошибки
+        return mav;                     // возвращаем имя представления, которое должно отобразиться,
+        // если возникло данное исключение
 
-
+     }
 
 }

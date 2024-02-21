@@ -22,6 +22,8 @@ public class UserRepr {
 
     private String password;
 
+    private Integer age;
+
     @NotEmpty
 
     private String matchingPassword;
@@ -38,6 +40,7 @@ public class UserRepr {
         this.username=user.getUsername();
         this.password=user.getPassword();
         this.email=user.getEmail();
+        this.age=user.getAge();
     }
 
     public UserRepr(String username) {
@@ -84,6 +87,14 @@ public class UserRepr {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
