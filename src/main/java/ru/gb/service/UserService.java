@@ -3,6 +3,8 @@ package ru.gb.service;
 
 
 
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,10 @@ public interface UserService {
 
     void delete(long id);
 
-    List<UserRepr> findWithFilter(String usernameFilter);
+   // List<UserRepr> findWithFilter(String usernameFilter);
+   // поменяли List на Page
+    Page<UserRepr> findWithFilter(String usernameFilter, Integer minAge, Integer maxAge,
+                                  Integer page, Integer size);
+
 
 }

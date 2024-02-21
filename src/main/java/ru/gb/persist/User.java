@@ -37,6 +37,10 @@ public class User {
    @Column
     private String email;
 
+
+   @Column
+   private Integer age;
+
     // User связан с контактами отношениями ОнеТуМени
     @OneToMany(mappedBy = "user",cascade=CascadeType.ALL)  // это имя поля в классе Contact, в котором хранится ссылка (чтобы не образовывалась промежуточная таблица)
     private List<Contact> contacts; // в поле будут содержаться все контакты, которые привязаны к данному пользователю
@@ -61,6 +65,7 @@ public class User {
         this.username=user.getUsername();
         this.password=user.getPassword();
         this.email=user.getEmail();
+        this.age =user.getAge();
     }
 
 
@@ -130,5 +135,13 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
