@@ -1,5 +1,6 @@
 package ru.gb.persist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -27,6 +28,8 @@ public class User {
   //  @NotEmpty
     private String username;
   //  @NotEmpty
+
+    @JsonIgnore  // если не хотим, чтобы выводилось
     @Column(nullable = false,length = 512)
     private String password;
 
