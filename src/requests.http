@@ -1,0 +1,18 @@
+GET http://localhost:8080/user/lesson04-spring-boot/api/v1/users/all
+
+###
+
+GET http://localhost:8080/user/lesson04-spring-boot/api/v1/users/1
+
+###
+
+POST http://localhost:8080/user/lesson04-spring-boot/api/v1/users
+Content-Type: application/json
+
+{
+    "username": "user55",
+    "password": "uytr",
+    "email": "user77@mail.com",
+    "age":  43
+
+}
